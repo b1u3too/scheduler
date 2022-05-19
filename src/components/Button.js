@@ -3,7 +3,7 @@ import React from "react";
 import "components/Button.scss";
 
 export default function Button(props) {
-   const label = props.children;
+   const text = props.children;
    const { onClick, disabled } = props;
 
    let buttonClass = "button";
@@ -20,6 +20,6 @@ export default function Button(props) {
       <button 
          className={buttonClass}
          onClick={onClick}
-         disabled={disabled}>{label}</button>
+         disabled={disabled}>{text}</button>
    );
 }
