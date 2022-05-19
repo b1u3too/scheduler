@@ -13,15 +13,11 @@ export default function DayListItem(props) {
   const dayClass = classNames(classConfig);
 
   function formatSpots(num) {
-    if (num === 0) {
-      return 'no spots';
-    }
-
     if (num === 1) {
       return '1 spot';
     } 
 
-    return `${num} spots`;
+    return `${spots === 0 ? "no" : num} spots`;
   }
   
   return (
