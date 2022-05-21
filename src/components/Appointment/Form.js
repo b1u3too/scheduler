@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../Button';
 import InterviewerList from 'components/InterviewerList';
 
 export default function Form (props) {
+  const { onSave, onCancel } = props;
+  const [student, setStudent] = useState(props.student || "");
+  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
