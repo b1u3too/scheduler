@@ -7,10 +7,25 @@ export default function Form (props) {
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
+  function reset() {
+    setStudent("");
+    setInterviewer(null);
+  }
+
+  function cancel() {
+    reset();
+    onCancel();
+  }
+
+  function handleSubmit (event) {
+    event.preventDefault();
+    onSave(student, interviewer);
+  }
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        <form autoComplete="off">
+        <form autoComplete="off" onSubmit={handleSubmit}>
           <input
             className="appointment__create-input text--semi-bold"
             name="name"
@@ -28,8 +43,8 @@ export default function Form (props) {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger onClick={onCancel}>Cancel</Button>
-          <Button confirm onClick={onSave}>Save</Button>
+          <Button danger onClick={cancel}>Cancel</Button>
+          <Button confirm onClick={handleSubmit} type="submit">Save</Button>
         </section>
       </section>
     </main>
