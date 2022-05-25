@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import "./styles.scss";
 
@@ -7,7 +7,12 @@ import Show from "./Show";
 import Empty from "./Empty";
 
 export default function Appointment (props) {
+  const { time, interview } = props;
+
   return (
-    <article className="appointment"></article>
+    <article className="appointment">
+      <Header time={time} />
+      { interview ? <Show /> : <Empty />}
+    </article>
   );
 }
