@@ -24,6 +24,9 @@ export default function Application(props) {
       appointments: {}
     }
   );
+  
+  const dailyAppointments = [];
+
   const setDay = day => setState({...state, day});
   const setDays = days => setState(prev => ({...prev, days}));
 
@@ -58,7 +61,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {renderAppointments(state.appointments)}
+        {renderAppointments(dailyAppointments)}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
