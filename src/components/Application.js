@@ -1,27 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Axios from "axios";
+import axios from "axios";
 import Appointment from "./Appointment";
 
 import "components/Application.scss";
 import DayList from "components/DayList";
-
-const days = [
-  {
-    id: 1,
-    name: "Monday",
-    spots: 2,
-  },
-  {
-    id: 2,
-    name: "Tuesday",
-    spots: 5,
-  },
-  {
-    id: 3,
-    name: "Wednesday",
-    spots: 0,
-  },
-];
 
 const appointments = {
   "1": {
@@ -75,6 +57,15 @@ function renderAppointments(aptObject) {
 
 export default function Application(props) {
   const [day, setDay] = useState("Monday");
+  const [days, setDays] = useState([]);
+
+  useEffect(() => {
+    axios.get("/api/days")
+      .then(res => {
+        setDays(res.data);
+      })
+      .catch(err => console.log(err.message));
+  }, [])
 
   return (
     <main className="layout">
