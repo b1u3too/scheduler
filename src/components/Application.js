@@ -1,21 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Appointment from "./Appointment";
-import { getAppointmentsForDay } from "./helpers/selectors";
+import { getAppointmentsForDay, getInterview } from "./helpers/selectors";
 
 import "components/Application.scss";
 import DayList from "components/DayList";
-
-function renderAppointments(aptArry) {
-  
-  return aptArry.map((appointment) => {
-    return (
-      <Appointment
-      key={appointment.id}
-      {...appointment} />
-    );
-  });
-}
 
 export default function Application(props) {
   const [state, setState] = useState(
@@ -28,6 +17,19 @@ export default function Application(props) {
   );
 
   const setDay = day => setState({...state, day});
+  const appointments = getAppointmentsForDay(state, state.day);
+  const renderedAppointments = appointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+
+    return (
+      <Appointment 
+        key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        interview={interview}
+      />
+    );
+  })
 
   useEffect(() => {
     Promise.all([
@@ -45,7 +47,6 @@ export default function Application(props) {
       .catch(err => console.log(err.message));
   }, []);
 
-  console.log(state.interviewers);
 
   return (
     <main className="layout">
@@ -70,7 +71,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {renderAppointments(getAppointmentsForDay(state, state.day))}
+        {renderedAppointments}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
