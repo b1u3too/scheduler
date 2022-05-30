@@ -1,10 +1,13 @@
+//Utilities
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+//Components
 import Appointment from "./Appointment";
-import { getAppointmentsForDay, getInterview } from "./helpers/selectors";
-
-import "components/Application.scss";
 import DayList from "components/DayList";
+//helpers and hooks
+import { getAppointmentsForDay, getInterview } from "./helpers/selectors";
+//Style
+import "components/Application.scss";
 
 export default function Application(props) {
   const [state, setState] = useState(
