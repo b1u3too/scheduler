@@ -28,7 +28,12 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     }
-    setState({ ...state, appointments });
+
+    return axios.put(`/api/appointments/${id}`, { interview })
+      .then(res => {
+        setState({ ...state, appointments });
+      })
+      .catch(err => console.log(err.message));
   }
 
   const setDay = day => setState({...state, day});
