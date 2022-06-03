@@ -33,7 +33,6 @@ export default function Application(props) {
       .then(res => {
         setState({ ...state, appointments });
       })
-      .catch(err => console.log(err.message));
   }
 
   function deleteInterview(id) {
@@ -48,7 +47,6 @@ export default function Application(props) {
 
     return axios.delete(`api/appointments/${id}`)
       .then(() => setState({...state, appointments }))
-      .catch(err => {console.log(err.message)})
   }
 
   const setDay = day => setState({...state, day});
