@@ -54,7 +54,7 @@ describe("Form", () => {
     const { getByText } = render(
       <Form 
         interviewers={interviewers} 
-        student="  " 
+        student="Bob" 
         onSave={onSave} 
         interviewer={null}
       />
@@ -71,7 +71,7 @@ describe("Form", () => {
     const { queryByText, getByText } = render(
       <Form 
         interviewers={interviewers}
-        interviewer={interviewers[0]}
+        interviewer={interviewers[0].id}
         student="Lydia Miller-Jones"
         onSave={onSave}
       />
