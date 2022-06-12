@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, fireEvent, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, waitForElementToBeRemoved, queryByText } from "@testing-library/react";
+import { render, cleanup, waitForElement, fireEvent, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, waitForElementToBeRemoved, queryByText, queryByAltText } from "@testing-library/react";
 
 import Application from "components/Application";
 
@@ -43,9 +43,33 @@ describe("Application", () => {
 
     //retrieve day list and check number of spots updated
     const days = getAllByTestId(container, "day");
-    const monday = days.find(data => queryByText(data, "Monday"));
+    const day = days.find(data => queryByText(data, "Monday"));
 
-    expect(getByText(monday, /no spots remaining/i)).toBeInTheDocument();
+    expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
+  });
+
+  it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
+    const { container } = render(<Application />);
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+  
+    //find appointment and click Delete
+    const appointments = getAllByTestId(container, "appointment");
+    const appointment = appointments.find(data => queryByText(data, "Archie Cohen"));
+    fireEvent.click(getByAltText(appointment, "Delete"));
+
+    //check and use delete confirmation dialogue
+    expect(getByText(appointment, "Are you sure you would like to delete?")).toBeInTheDocument();
+    fireEvent.click(getByText(appointment, "Confirm"));
+    expect(getByText(appointment, /deleting/i)).toBeInTheDocument();
+
+    //after deleting status finished, check new add button present
+    await waitForElementToBeRemoved(() => getByText(appointment, /deleting/i));
+    expect(queryByAltText(appointment, /add/i)).toBeInTheDocument();
+
+    //check that day counter updated appropriately (dec 1)
+    const days = getAllByTestId(container, "day");
+    const day = days.find(data => queryByText(data, "Monday"));
+    expect(getByText(day, /2 spots remaining/i)).toBeInTheDocument();
   });
 });
 
