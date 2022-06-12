@@ -61,7 +61,10 @@ export default function Appointment (props) {
   }
 
   return (
-    <article className="appointment">
+    <article 
+      className="appointment"
+      data-testid="appointment"
+    >
       <Header time={time} />
       { 
         mode === SHOW && 
