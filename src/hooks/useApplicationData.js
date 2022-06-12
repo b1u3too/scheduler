@@ -80,7 +80,7 @@ export default function useApplicationData() {
       [id]: appointment
     }
 
-    return axios.delete(`api/appointments/${id}`)
+    return axios.delete(`/api/appointments/${id}`)
       .then(() => {
         const days = updateSpots(state, state.day, appointments);
         setState({ ...state, appointments, days})
