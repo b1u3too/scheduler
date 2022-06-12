@@ -45,7 +45,6 @@ export default function useApplicationData() {
     //count the number of appointments with null values
     const spots = countSpotsForDay(dayObj, appointments);
 
-    console.log(`We see ${spots} spots for ${dayName}`);
     //copy over an updated day object
     const day = { ...dayObj, spots };
     //substitute that new day object in for the matching name in state.days
