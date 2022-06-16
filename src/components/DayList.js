@@ -1,5 +1,5 @@
-import React from 'react';
-import DayListItem from './DayListItem';
+import React from "react";
+import DayListItem from "./DayListItem";
 
 export default function DayList(props) {
   const { days, value, onChange } = props;
@@ -10,19 +10,15 @@ export default function DayList(props) {
 
   const renderedDays = days.map((day) => {
     return (
-      <DayListItem 
+      <DayListItem
         key={day.id}
         name={day.name}
         spots={day.spots}
         selected={isSelected(day.name)}
         setDay={onChange}
       />
-    ); 
-  })
+    );
+  });
 
-  return (
-    <ul>
-      {renderedDays}
-    </ul>
-  );
+  return <ul>{renderedDays}</ul>;
 }

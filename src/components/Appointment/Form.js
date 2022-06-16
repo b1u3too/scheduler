@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import Button from '../Button';
-import InterviewerList from 'components/InterviewerList';
+import React, { useState } from "react";
+import Button from "../Button";
+import InterviewerList from "components/InterviewerList";
 
-export default function Form (props) {
+export default function Form(props) {
   const { interviewers, onSave, onCancel } = props;
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
@@ -18,7 +18,7 @@ export default function Form (props) {
     onCancel();
   }
 
-  function handleSubmit (event) {
+  function handleSubmit(event) {
     event.preventDefault();
     validate();
   }
@@ -53,7 +53,7 @@ export default function Form (props) {
           />
         </form>
         <section className="appointment__validation">{error}</section>
-        <InterviewerList 
+        <InterviewerList
           interviewers={interviewers}
           value={interviewer}
           onChange={setInterviewer}
@@ -61,8 +61,12 @@ export default function Form (props) {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onClick={handleSubmit} type="submit">Save</Button>
+          <Button danger onClick={cancel}>
+            Cancel
+          </Button>
+          <Button confirm onClick={handleSubmit} type="submit">
+            Save
+          </Button>
         </section>
       </section>
     </main>

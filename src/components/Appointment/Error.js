@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-export default function Errors (props) {
+export default function Errors(props) {
   const { message, onClose } = props;
 
   return (
